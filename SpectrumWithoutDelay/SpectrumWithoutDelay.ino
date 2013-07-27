@@ -57,7 +57,7 @@ void loop()
     // save the last time you blinked the LED 
     previousMillis = currentMillis;   
 
-    // if the LED is off turn it on and vice-versa:
+    // Find out which led is on and turn the next one on sequence
     if (greenState == HIGH){
       greenState = LOW;
       blueState = HIGH;

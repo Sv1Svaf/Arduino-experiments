@@ -40,7 +40,9 @@ long interval = 1000;           // interval at which to blink (milliseconds)
 
 void setup() {
   // set the digital pin as output:
-  pinMode(greenpin, OUTPUT);      
+  pinMode(greenpin, OUTPUT);  
+  pinMode(bluepin, OUTPUT);
+  pinMode(redpin, OUTPUT);  
 }
 
 void loop()
@@ -59,12 +61,14 @@ void loop()
 
     // Find out which led is on and turn the next one on sequence
     if (greenState == HIGH){
-      greenState = LOW;
       blueState = HIGH;
+      greenState = LOW;
       redState = LOW;
      }
      else
       greenState = HIGH;
+      blueState = LOW;
+
 
     // set the LED with the greenState of the variable:
     digitalWrite(greenpin, greenState);

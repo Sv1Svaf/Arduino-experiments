@@ -28,10 +28,10 @@ const int redpin =  11;        // the number of the red LED pin
 const int bluepin =  12;        // the number of the blue LED pin
 
 // Variables will change:
-int greenState = LOW;             // greenState used to set the LED
-int blueState = LOW;             // greenState used to set the LED
-int redState = LOW;             // greenState used to set the LED
-
+int greenState = HIGH;             // greenState used to set the LED
+int blueState = HIGH;             // greenState used to set the LED
+int redState = HIGH;             // greenState used to set the LED
+int counter = 0;                  //telur hvert  er kominn  röðinni
 long previousMillis = 0;        // will store last time LED was updated
 
 // the follow variables is a long because the time, measured in miliseconds,
@@ -60,17 +60,39 @@ void loop()
     previousMillis = currentMillis;   
 
     // Find out which led is on and turn the next one on sequence
-    if (greenState == HIGH){
-      blueState = HIGH;
+    if (greenState == LOW && blueState == HIGH && redState == HIGH){
+      blueState = LOW;
       greenState = LOW;
+      redState = HIGH;
+     }
+     else if (greenState == LOW && blueState ==LOW){
+       blueState = LOW;
+       greenState = HIGH;
+       redState = HIGH;
+     }
+     else if (blueState == LOW && redState == HIGH){
+      blueState = LOW;
+      greenState = HIGH;
       redState = LOW;
      }
-     else
+     else if (blueState == LOW && redState == LOW){
+      blueState = HIGH;
       greenState = HIGH;
-      blueState = LOW;
+      redState = LOW;
+     }
+     else if (redState == LOW && greenState == HIGH){
+       blueState = HIGH;
+       redState = LOW;
+       greenState = LOW;
+     }
+     else {
+      greenState = LOW;
+      blueState = HIGH;
+      redState = HIGH;
+     }
+      
 
-
-    // set the LED with the greenState of the variable:
+    // update the LEDs with the status of the variables:
     digitalWrite(greenpin, greenState);
     digitalWrite(bluepin, blueState);
     digitalWrite(redpin, redState);
